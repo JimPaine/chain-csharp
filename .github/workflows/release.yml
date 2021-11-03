@@ -1,7 +1,8 @@
 name: release
 
 on:
-  push: [ 'main' ]
+  push:
+    branches: [ main ]
 
 jobs:
   push-to-packages:
