@@ -31,4 +31,5 @@ jobs:
       - run: |
             gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
             gh release create v0.1.${{ github.RUN_NUMBER }} \
-            --title "chain-csharp v0.1.${{ github.RUN_NUMBER }}"
+            --title "chain-csharp v0.1.${{ github.RUN_NUMBER }}" \
+            -F changelog.md
