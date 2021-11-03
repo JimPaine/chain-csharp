@@ -26,10 +26,10 @@ jobs:
         with:
           context: ./src
           push: true
-          tags: ghcr.io/jimpaine/chain-csharp:0.1.${{ github.RUN_ID }}
+          tags: ghcr.io/jimpaine/chain-csharp:0.1.${{ github.RUN_NUMBER }}
 
       - run: gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
       - run: |
-            gh release create v0.1.${{ github.RUN_ID }} \
-            --title "chain-csharp v0.1.${{ github.RUN_ID }}" \
+            gh release create v0.1.${{ github.RUN_NUMBER }} \
+            --title "chain-csharp v0.1.${{ github.RUN_NUMBER }}" \
             --repo "${{github.SERVER_URL}}/${{github.REPOSITORY}}"
