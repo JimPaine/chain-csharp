@@ -1,0 +1,31 @@
+name: release
+
+on:
+  push: [ 'main' ]
+
+jobs:
+  push-to-packages:
+    name: Push to Packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker login
+        uses: docker/login@v1.10.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v2.7.0
+        with:
+          context: ./src
+          push: true
+          tags: jimpaine/chain-csharp:0.1.${{ github.RUN_ID }}
+
+      - run: gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+      - run: gh release create v0.1.${{ github.RUN_ID }}
