@@ -10,7 +10,7 @@ app.MapGet("/", async () => {
     return new {
         response = response,
         nestedResponse = httpClient != null ?
-                new { response = await httpClient.GetStringAsync(nextHop) } :
+                await httpClient.GetFromJsonAsync<dynamic>(nextHop) :
                 null
     };
 });
