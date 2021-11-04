@@ -29,6 +29,7 @@ jobs:
           tags: ghcr.io/jimpaine/chain-csharp:0.1.${{ github.RUN_NUMBER }}
 
       - run: |
+            gh auth login --with-token <<< "${{ secrets.GITHUB_TOKEN }}"
             gh release create v0.1.${{ github.RUN_NUMBER }} \
             --title "Chain C# ${{ github.RUN_NUMBER }}" \
             --notes "" \
