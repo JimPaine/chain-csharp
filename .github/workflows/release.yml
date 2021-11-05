@@ -32,3 +32,12 @@ jobs:
             --notes "```\n$ docker pull ghcr.io/jimpaine/chain-csharp:0.1.${{ github.RUN_NUMBER }}\n```" \
             --repo "${{github.SERVER_URL}}/${{github.REPOSITORY}}"
         shell: bash
+
+      - name: Deploy Revision
+        run: |
+            az login --service-principal -u ${{ secrets.AZURE_AUTH_ID }} -p ${{ secrets.AZURE_AUTH_PASSWORD }}
+            az containerapp update \
+            --name csharp \
+            --resource-group capp \
+            --image ghcr.io/jimpaine/chain-csharp:0.1.${{ github.RUN_NUMBER }} \
+            --environment-variables version=0.1.${{ github.RUN_NUMBER }}
