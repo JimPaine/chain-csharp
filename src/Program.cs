@@ -10,13 +10,12 @@ var app = builder.Build();
 app.UseDeveloperExceptionPage();
 
 app.MapGet("/", async () => {
-    return await Task.FromResult(nextHop);
-    // return new {
-    //     response = response,
-    //     nestedResponse = httpClient != null ?
-    //             await httpClient.GetFromJsonAsync<dynamic>(nextHop) :
-    //             null
-    // };
+    return new {
+        response = response,
+        nestedResponse = httpClient != null ?
+                await httpClient.GetFromJsonAsync<dynamic>(nextHop) :
+                null
+    };
 });
 
 app.Run();
