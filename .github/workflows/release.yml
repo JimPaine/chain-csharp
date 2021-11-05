@@ -35,7 +35,10 @@ jobs:
 
       - name: Deploy Revision
         run: |
-            az login --service-principal -u ${{ secrets.AZURE_AUTH_ID }} -p ${{ secrets.AZURE_AUTH_PASSWORD }}
+            az login --service-principal \
+            -u ${{ secrets.AZURE_AUTH_ID }} \
+            -p ${{ secrets.AZURE_AUTH_PASSWORD }} \
+            --tenant ${{ secrets.AZURE_AUTH_TENANT }}
             az containerapp update \
             --name csharp \
             --resource-group capp \
