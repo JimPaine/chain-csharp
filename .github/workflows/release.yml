@@ -33,6 +33,12 @@ jobs:
             --repo "${{github.SERVER_URL}}/${{github.REPOSITORY}}"
         shell: bash
 
+  Deploy:
+    name: Push to Packages
+    needs: push-to-packages
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Login to Azure
         run: |
             az login --service-principal \
