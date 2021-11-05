@@ -1,8 +1,10 @@
 var builder = WebApplication.CreateBuilder(args);
 
 string? nextHop = Environment.GetEnvironmentVariable("nextHop");
-
+string? version = Environment.GetEnvironmentVariable("version");
 string response = Environment.GetEnvironmentVariable("responseMessage") ?? "Hello from C# link";
+response = $"{response} - Version: {version}";
+
 HttpClient? httpClient = nextHop != null ? new HttpClient() : null;
 
 var app = builder.Build();
