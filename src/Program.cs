@@ -2,7 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 string? nextHop = Environment.GetEnvironmentVariable("nextHop");
 string response = Environment.GetEnvironmentVariable("responseMessage") ?? "Hello from C# link";
-HttpClient? httpClient = nextHop != null ? new HttpClient { BaseAddress = new Uri(nextHop) } : null;
+HttpClient? httpClient = nextHop != null ? new HttpClient() : null;
 
 var app = builder.Build();
 
