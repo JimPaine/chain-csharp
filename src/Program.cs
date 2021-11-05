@@ -6,6 +6,8 @@ HttpClient? httpClient = nextHop != null ? new HttpClient() : null;
 
 var app = builder.Build();
 
+app.UseDeveloperExceptionPage();
+
 app.MapGet("/", async () => {
     return new {
         response = response,
