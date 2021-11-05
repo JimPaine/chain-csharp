@@ -33,12 +33,21 @@ jobs:
             --repo "${{github.SERVER_URL}}/${{github.REPOSITORY}}"
         shell: bash
 
-      - name: Deploy Revision
+      - name: Login to Azure
         run: |
             az login --service-principal \
             -u ${{ secrets.AZURE_AUTH_ID }} \
             -p ${{ secrets.AZURE_AUTH_PASSWORD }} \
             --tenant ${{ secrets.AZURE_AUTH_TENANT }}
+
+      - name: Add container app preview
+        run: |
+            az extension add \
+            --source https://workerappscliextension.blob.core.windows.net/azure-cli-extension/containerapp-0.2.0-py2.py3-none-any.whl
+            az provider register --namespace Microsoft.Web
+
+      - name: Deploy Revision
+        run: |
             az containerapp update \
             --name csharp \
             --resource-group capp \
