@@ -34,7 +34,7 @@ jobs:
         shell: bash
 
   Deploy:
-    name: Push to Packages
+    name: Deploy App
     needs: push-to-packages
     runs-on: ubuntu-latest
 
